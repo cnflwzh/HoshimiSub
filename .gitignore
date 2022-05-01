@@ -1,4 +1,5 @@
-./sourcetxt/
+.idea
+sourcetxt/*.txt
 ### Python template
 # Byte-compiled / optimized / DLL files
 __pycache__/
