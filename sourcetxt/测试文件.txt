@@ -1,0 +1,1 @@
+[message text=测试内容 name=长濑琴乃 thumbnial=img_chr_adv_chs-00 clip=\{"_startTime":2,"_duration":3,"_easeInDuration":0.0,"_easeOutDuration":0.0,"_blendInDuration":-1.0,"_blendOutDuration":-1.0,"_mixInEaseType":1,"_mixOutEaseType":1,"_timeScale":1.0\}]
