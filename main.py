@@ -1,12 +1,13 @@
 import json
+
 from Message import Message
 from tool import timeSecToTime
 
-originalFile = open("./sourcetxt/test.txt", encoding="UTF-8")
+originalFile = open("./sourcetxt/adv_event_2205_01_04.txt", encoding="UTF-8")
+fileName = originalFile.name.split("/")[-1].split(".")[-2].__str__()
+srtFile = open("./output/%s.srt" % fileName, mode='w', encoding="UTF-8")
 messageList = []
 fileLines = originalFile.readlines()
-
-
 for line in fileLines:
     if line.__contains__("message"):
         # 数据切割
@@ -20,11 +21,12 @@ for line in fileLines:
         startTime = timeObject["startTime"]
         takeTime = timeObject["duration"]
         endTime = startTime + takeTime
-        startTimeString=timeSecToTime(startTime)
+        startTimeString = timeSecToTime(startTime)
         endTimeString = timeSecToTime(endTime)
-        messageList.append(Message(text, name, timeJson, messageList.__len__() + 1,startTimeString,endTimeString))
+        messageList.append(Message(text, name, timeJson, messageList.__len__() + 1, startTimeString, endTimeString))
 
-messageList.__str__()
+for message in messageList:
+    srtFile.write(str(message.number) + "\n")
+    srtFile.write(message.startTimeSting + " --> " + message.endTimeSting + "\n")
+    srtFile.write(message.text + "\n\n")
 originalFile.close()
-
-
