@@ -46,12 +46,10 @@ def basicSrt(filePath: str):
             # 格式化数据
             text = afterSplit[0][5:]
             name = afterSplit[1][5:]
-            info(afterSplit.__len__())
             if afterSplit.__len__() == 4:
                 timeJson = afterSplit[3][5:].replace("_", "")
             else:
                 timeJson = afterSplit[2][5:].replace("_", "")
-            info(timeJson)
             timeObject = json.loads(timeJson)
             # 计算时间轴的时间
             startTime = timeObject["startTime"]
@@ -68,10 +66,11 @@ def basicSrt(filePath: str):
         srtFile.write(message.startTimeSting + " --> " + message.endTimeSting + "\n")
         srtFile.write(message.text + "\n\n")
     originalFile.close()
-    succeed("Program Finished Successfully")
+    succeed("Single Finished Successfully")
 
 
 def multFile(filePath: str, subType: int):
     fileList = os.listdir(filePath)
     for singleFile in fileList:
         basicSrt(join(filePath + singleFile))
+    succeed("Multi Finished Successfully")
