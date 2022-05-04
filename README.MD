@@ -1,7 +1,7 @@
 # HoshimiSub
 
 这是一个基于[HoshimiToolkit](https://github.com/MalitsPlus/HoshimiToolkit)的项目，在使用之前请确保您能正确运行该项目  
-本项目的目标是能够通过解包后的文件自动生成字幕文件，以提升打轴的工作效率。
+本项目的目标是能够通过HoshimiToolkit生成出的文件自动生成字幕文件，以提升打轴的工作效率。
 
 ## 开发环境
 
