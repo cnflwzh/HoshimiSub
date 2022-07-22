@@ -12,3 +12,8 @@ class FolderOrFile(Enum):
 class SubType(Enum):
     SRT = 0
     ASS = 1
+
+
+class StyleMode(Enum):
+    OneStyle = 0
+    DifferentStyle = 1

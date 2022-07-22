@@ -8,3 +8,4 @@ class Message:
         self.number = number
         self.startTimeSting = startTimeSting
         self.endTimeSting = endTimeSting
+
