@@ -1,4 +1,5 @@
 import math
+import os
 
 from rich.console import Console
 
@@ -27,3 +28,14 @@ def timeSecToTime(time: float):
     mill, sec = math.modf(time)
     timeString = "%d:%02d:%02d," % (h, m, s) + str("%.3f" % mill)[2:]
     return timeString
+
+
+def initOutputPath(outputPath: str):
+    if not os.path.exists(outputPath):
+        os.makedirs(outputPath)
+        info(f"Directory {outputPath} has been created")
+    else:
+        info(f"Directory {outputPath} already exists")
+    if outputPath[-1] != "/":
+        outputPath += "/"
+    return outputPath

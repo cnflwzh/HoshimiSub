@@ -2,6 +2,7 @@ import argparse
 
 from src import subtitleGenerate
 from src.tools.configEnum import FolderOrFile, SubType
+from src.tools.tool import initOutputPath
 
 
 def main():
@@ -15,12 +16,14 @@ def main():
                        help="If you add this argument, the role name will be included in the output, note that when "
                             "in SRT mode it is added before each line of text by default, ASS mode will be a separate "
                             "line, remember edit your ass template file")
+    parse.add_argument("-o", "--output", type=str, default="./output/  ", help="Enter the path to the output file")
 
     args = parse.parse_args()
     mode = FolderOrFile(args.mode)
     subType = SubType(args.type)
     includeName = args.name
-    subtitleGenerate.generateSubtitle(mode, args.path, subType, includeName)
+    outputPath = initOutputPath(args.output.strip())
+    subtitleGenerate.generateSubtitle(mode, args.path, subType, includeName, outputPath)
 
 
 if __name__ == "__main__":

@@ -1,4 +1,3 @@
-import os
 import sys
 
 from jinja2 import FileSystemLoader, Environment
@@ -12,7 +11,7 @@ dialogTag = "IP_MESSAGE"
 cueCaption = "IP_CUE"
 
 
-def generateSubtitle(mode: str, filePath: str, subType: str, includeName: bool):
+def generateSubtitle(mode: FolderOrFile, filePath: str, subType: SubType, includeName: bool, outputPath: str):
     try:
         if filePath == "":
             error("filePath is None")
@@ -24,18 +23,18 @@ def generateSubtitle(mode: str, filePath: str, subType: str, includeName: bool):
                 match subType:
                     case SubType.SRT:
                         info("======Single file conversion to SRT task is starting======")
-                        srtGenerate(filePath, includeName)
+                        srtGenerate(filePath, includeName, outputPath)
                     case SubType.ASS:
                         info("======Single file conversion to ASS task is starting======")
-                        assGenerate(filePath, includeName)
+                        assGenerate(filePath, includeName, outputPath)
             case FolderOrFile.Folder:
                 match subType:
                     case SubType.SRT:
                         info("======Batch conversion to SRT task is starting======")
-                        batchSRT(filePath, includeName)
+                        batchSRT(filePath, includeName, outputPath)
                     case SubType.ASS:
                         info("======Batch conversion to ASS task is starting======")
-                        batchASS(filePath, includeName)
+                        batchASS(filePath, includeName, outputPath)
 
     except Exception as e:
         print(e)
@@ -58,7 +57,7 @@ def getSingleFileInfo(filePath):
     return messageList
 
 
-def batchSRT(filePath, includeName):
+def batchSRT(filePath, includeName, outputPath):
     """
     生成批量SRT文件
     :param filePath: 文件夹路径
@@ -67,13 +66,14 @@ def batchSRT(filePath, includeName):
     """
     fileList = os.listdir(filePath)
     for file in fileList:
-        srtGenerate(filePath + "/" + file, includeName)
+        srtGenerate(filePath + "/" + file, includeName, outputPath)
     succeed("All files have been converted to SRT")
 
 
-def srtGenerate(filePath, includeName):
+def srtGenerate(filePath, includeName, outputPath):
     """
     生成单个SRT文件
+    :param outputPath: 输出文件路径
     :param filePath: 文件路径
     :param includeName: 是否包含名字
     :return:
@@ -82,7 +82,7 @@ def srtGenerate(filePath, includeName):
         messageList = getSingleFileInfo(filePath)
         fileName = filePath.replace("\\", "/").split("/")[-1].split(".")[-2].__str__()
         info("Now Processing: %s" % fileName)
-        srtFile = open("./output/%s.srt" % fileName, mode='w', encoding="UTF-8")
+        srtFile = open(outputPath + "%s.srt" % fileName, mode='w', encoding="UTF-8")
         i = 0
         if includeName:
             for message in messageList:
@@ -96,7 +96,7 @@ def srtGenerate(filePath, includeName):
                         srtFile.write(message.text + "\n\n")
         else:
             for message in messageList:
-                if message.messageType == "narration" and message.text is not None:
+                if message.text is not None:
                     i += 1
                     srtFile.write(i.__str__() + "\n")
                     srtFile.write(message.startTimeSting + " --> " + message.endTimeSting + "\n")
@@ -107,22 +107,24 @@ def srtGenerate(filePath, includeName):
         error("srtGenerate: %s" % e + "\nError file: %s" % filePath)
 
 
-def batchASS(filePath, includeName):
+def batchASS(filePath, includeName, outputPath):
     """
     生成批量ASS文件
+    :param outputPath: 文件输出路径
     :param filePath: 文件夹路径
     :param includeName: 是否包含名字
     :return:
     """
     fileList = os.listdir(filePath)
     for file in fileList:
-        assGenerate(filePath + "/" + file, includeName)
+        assGenerate(filePath + "/" + file, includeName, outputPath)
     succeed("All files have been converted to ASS")
 
 
-def assGenerate(filePath, includeName):
+def assGenerate(filePath, includeName, outputPath):
     """
     生成单个ASS文件
+    :param outputPath: 文件输出路径
     :param filePath: 文件路径
     :param includeName: 是否包含名字
     :return:
@@ -130,7 +132,7 @@ def assGenerate(filePath, includeName):
     preProcessedMessages = getSingleFileInfo(filePath)
     fileName = filePath.replace("\\", "/").split("/")[-1].split(".")[-2].__str__()
     info("Now Processing: %s" % fileName)
-    assFile = open("./output/%s.ass" % fileName, mode='w', encoding="UTF-8")
+    assFile = open(outputPath + "%s.ass" % fileName, mode='w', encoding="UTF-8")
     messageList = []
     if includeName:
         for message in preProcessedMessages:
