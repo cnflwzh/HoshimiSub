@@ -1,16 +1,27 @@
-import subGenerate
-from programConfig import *
+import argparse
 
-# TODO 缺少灰色样式文本的解析
+from src import subtitleGenerate
+from src.tools.configEnum import FolderOrFile, SubType
 
-# Configuration
-# 该选项为选择处理模式，文件夹或单文件 File Folder
-mode = FolderOrFile.File
-# 该选项为指定文件或文件夹路径
-filePath = "./sourcetxt/adv_card_rui_04_01.txt"
-# 该选项指定字幕类型  ASS SRT 目前版本只支持SRT格式
-subType = SubType.ASS
-# 该选项用于指定ASS字幕时的样式，是不同人不同样式还是所有人一个样式 OneStyle or DifferentStyle
-styleMode = StyleMode.OneStyle
 
-subGenerate.generateSub(mode, filePath, subType, styleMode)
+def main():
+    parse = argparse.ArgumentParser(description="IDOLY PRIDE Subtitle Generator")
+    parse.add_argument("-m", "--mode", type=str, choices=["file", "folder"], default="file",
+                       help="Select Mode Only One File Or A Folder")
+    parse.add_argument("-p", "--path", type=str, default="", help="Enter the path to the file or directory")
+    parse.add_argument("-t", "--type", type=str, choices=["srt", "ass"], default="srt",
+                       help="Enter the type of subtitle")
+    parse.add_argument("-n", "--name", action="store_true",
+                       help="If you add this argument, the role name will be included in the output, note that when "
+                            "in SRT mode it is added before each line of text by default, ASS mode will be a separate "
+                            "line, remember edit your ass template file")
+
+    args = parse.parse_args()
+    mode = FolderOrFile(args.mode)
+    subType = SubType(args.type)
+    includeName = args.name
+    subtitleGenerate.generateSubtitle(mode, args.path, subType, includeName)
+
+
+if __name__ == "__main__":
+    main()
