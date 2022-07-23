@@ -1,4 +1,5 @@
 import os
+import sys
 
 from jinja2 import FileSystemLoader, Environment
 
@@ -13,6 +14,9 @@ cueCaption = "IP_CUE"
 
 def generateSubtitle(mode: str, filePath: str, subType: str, includeName: bool):
     try:
+        if filePath == "":
+            error("filePath is None")
+            sys.exit(0)
         # 判断为单文件模式或文件夹模式
         match mode:
             case FolderOrFile.File:
@@ -92,7 +96,7 @@ def srtGenerate(filePath, includeName):
                         srtFile.write(message.text + "\n\n")
         else:
             for message in messageList:
-                if message.type == "narration" and message.text is not None:
+                if message.messageType == "narration" and message.text is not None:
                     i += 1
                     srtFile.write(i.__str__() + "\n")
                     srtFile.write(message.startTimeSting + " --> " + message.endTimeSting + "\n")
