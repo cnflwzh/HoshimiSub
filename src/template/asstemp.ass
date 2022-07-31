@@ -10,9 +10,9 @@ WrapStyle: 0
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: IP_NAME,思源黑体 CN,96,&H00FFFFFF,&H00000000,&H00FF2814,&H00000000,-1,0,0,0,100,100,0,0,1,2,2,2,10,10,200,1
-Style: IP_MESSAGE,思源黑体 CN,96,&H00FFFFFF,&H00000000,&H00FF2814,&H00000000,-1,0,0,0,100,100,0,0,1,2,2,2,10,10,200,1
-Style: IP_CUE,思源黑体 CN,96,&H00FFFFFF,&H00000000,&H00FF2814,&H00000000,-1,0,0,0,100,100,0,0,1,2,2,2,10,10,200,1
+Style: IP_NAME,思源黑体 CN,48,&H00000000,&H00000000,&H00FFFFFF,&H00000000,0,0,0,0,100,100,0,0,1,5,0,2,10,10,10,1
+Style: IP_MESSAGE,思源黑体 CN,90,&H00FFFFFF,&H00000000,&H00000000,&H00000000,-1,0,0,0,100,100,0,0,1,2,2,2,10,10,190,1
+Style: IP_CUE,思源黑体 CN,90,&H00A2A2A2,&H00000000,&H00000000,&H00000000,-1,0,0,0,100,100,0,0,1,2,2,2,10,10,190,1
 ;
 ; Please add your own Style here
 ;

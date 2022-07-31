@@ -60,6 +60,7 @@ def getSingleFileInfo(filePath):
 def batchSRT(filePath, includeName, outputPath):
     """
     生成批量SRT文件
+    :param outputPath: 输出路径
     :param filePath: 文件夹路径
     :param includeName: 是否包含名字
     :return:
@@ -142,6 +143,9 @@ def assGenerate(filePath, includeName, outputPath):
                 messageList.append(nameLine)
                 message.messageType = dialogTag
             if message.messageType == "narration":
+                message.messageType = cueCaption
+            if message.text.__contains__("（") or message.text.__contains__("）"):
+                message.text = message.text.replace("（", "").replace("）", "")
                 message.messageType = cueCaption
             messageList.append(message)
 
