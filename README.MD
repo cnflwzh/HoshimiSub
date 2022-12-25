@@ -59,5 +59,5 @@ python main.py -p ".\source" -t ass -m folder --name --style
 
 ## 写在最后
 
-如果有任何功能建议或者bug反馈，欢迎在issue中提出或者直接PM我，Q群、TG或者DC都能找到我。  
+如果有任何功能建议或者bug，欢迎在issue中提出、直接PR或者PM我，Q群或者TG均可。  
 **早坂芽衣可爱滴捏~**
