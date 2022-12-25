@@ -7,7 +7,10 @@ from src.tools.tool import timeSecToTime, error
 def getMessage(line: str):
     try:
         messageProperty = convertProperty(line)
-        timeObject = json.loads(messageProperty.get("clip").replace("_", ""))
+        timeJson = messageProperty.get("clip").replace("_", "")
+        if timeJson[-1] != "}":
+            timeJson += "}"
+        timeObject = json.loads(timeJson)
         startTime = timeSecToTime(timeObject["startTime"])
         endTime = timeSecToTime(timeObject["startTime"] + timeObject["duration"])
         return Message(messageProperty.get("text"), messageProperty.get("name"), messageProperty.get("clip"),
