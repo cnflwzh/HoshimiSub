@@ -24,7 +24,7 @@ Windows 11
 長瀬琴乃=长濑琴乃=KOTONO
 伊吹渚=伊吹渚=NAGISA
 白石沙季=白石沙季=SAKI
-一同=一起=TOGETHE
+一同=一起=TOGETHER
 ...
 ```
 
